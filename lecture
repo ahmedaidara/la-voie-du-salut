@@ -1,0 +1,18 @@
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.body.style.userSelect = 'none'; // Empêche la sélection de texte
+
+// Détection de capture d'écran (exemple avec une bibliothèque)
+const detectScreenshot = () => {
+  // Code de la bibliothèque pour détecter les captures d'écran
+  // Si une capture est détectée, afficher un message ou effectuer une action
+};
+setInterval(detectScreenshot, 1000); // Exécuter la fonction régulièrement
+
+// Watermark dynamique
+const watermark = document.createElement('div');
+watermark.textContent = 'Document protégé';
+watermark.style.position = 'fixed';
+watermark.style.top = '50%';
+watermark.style.left = '50%';
+watermark.style.transform = 'translate(-50%, -50%)';
+document.body.appendChild(watermark);
