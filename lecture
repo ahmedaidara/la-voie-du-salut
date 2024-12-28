@@ -1,0 +1,91 @@
+html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Livre</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            color: #d4af37; /* Golden color */
+        }
+        .content {
+            margin-top: 20px;
+            user-select: none; /* Disable text selection */
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Mon Livre</h1>
+        <div class="content">
+            <!-- Intégrez votre contenu de livre ici, par exemple en utilisant un lecteur PDF intégré comme PDF.js -->
+            <iframe src="path/to/your/book.pdf"></iframe>
+        </div>
+    </div>
+    <script>
+        // Empêcher le copier-coller
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('paste', function(e) {
+            e.preventDefault();
+        });
+
+        // Empêcher le clic droit
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Empêcher l'impression
+        function beforePrint(e) {
+            alert('L\'impression est désactivée pour ce document.');
+            e.preventDefault();
+        }
+
+        window.addEventListener('beforeprint', beforePrint);
+
+        // Empêcher la capture d'écran (partiellement possible)
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode == 44) { // Touche 'Impr écran'
+                alert('La capture d\'écran est désactivée.');
+                e.preventDefault();
+            }
+        });
+
+        // Empêcher le téléchargement du fichier PDF
+        const iframe = document.querySelector('iframe');
+        iframe.addEventListener('load', function() {
+            const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+            iframeDocument.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            iframeDocument.body.style.userSelect = "none";
+        });
+    </script>
+</body>
+</html>
