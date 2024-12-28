@@ -1,4 +1,4 @@
-html
+[00:30, 28/12/2024] Microsoft Copilot: ```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -27,10 +27,8 @@ html
             margin-top: 20px;
             user-select: none; /* Disable text selection */
         }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
+        p {
+            text-align: justify;
         }
     </style>
 </head>
@@ -38,8 +36,15 @@ html
     <div class="container">
         <h1 class="header">Mon Livre</h1>
         <div class="content">
-            <!-- Intégrez votre contenu de livre ici, par exemple en utilisant un lecteur PDF intégré comme PDF.js -->
-            <iframe src="path/to/your/book.pdf"></iframe>
+            <!-- Intégrer le texte de votre livre ici -->
+            <p>
+                <!-- Collez le texte de votre livre ici -->
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec fringilla purus. Nulla facilisi. Donec eu augue arcu. Aliquam erat volutpat. Suspendisse potenti. Cras sagittis, magna a semper hendrerit, orci lorem aliquam metus, nec pulvinar ligula felis vel augue. Fusce accumsan scelerisque diam, et cursus odio dictum sed. Integer interdum urna sed turpis bibendum, id sollicitudin felis pretium. Donec auctor, eros ut blandit pharetra, sem augue convallis metus, in vulputate purus nulla eget arcu. Duis nec sapien venenatis, convallis arcu at, facilisis ante. Nam efficitur turpis ac gravida ullamcorper. Quisque euismod tincidunt orci sit amet faucibus. Suspendisse vestibulum massa vel leo hendrerit, a sollicitudin felis tempor. Vivamus efficitur feugiat augue a fermentum. Curabitur dapibus libero id fermentum tempor. Integer tincidunt enim in orci facilisis, at aliquam nisi tincidunt. Donec egestas tortor sit amet tortor dapibus, sit amet congue ipsum vehicula.
+            </p>
+            <p>
+                <!-- Continuez à coller le reste du texte de votre livre dans d'autres paragraphes si nécessaire -->
+                Vivamus congue tortor nec nisi vehicula, in vulputate quam ultrices. Curabitur sagittis nisl sit amet ligula luctus, nec fringilla felis ullamcorper. In laoreet urna vitae lacinia egestas. Morbi gravida neque at dolor vestibulum, non mollis purus dapibus. Nullam ut efficitur nisi. Curabitur elementum dolor sed ligula varius, ac vehicula nisl fringilla. Mauris ut magna nec magna euismod cursus. Donec vitae urna nec nunc aliquam laoreet at in ex. Curabitur in turpis nec dui dignissim venenatis. Sed rutrum pharetra odio et suscipit. Ut vel nulla justo. Integer egestas ornare urna, at lacinia erat fringilla sed. Proin nec turpis nec sapien aliquam blandit sed nec lacus. Proin ac arcu consequat, tempor arcu non, tempus nulla. Suspendisse potenti.
+            </p>
         </div>
     </div>
     <script>
@@ -64,7 +69,7 @@ html
         // Empêcher l'impression
         function beforePrint(e) {
             alert('L\'impression est désactivée pour ce document.');
-            e.preventDefault();
+[00:30, 28/12/2024] Microsoft Copilot: e.preventDefault();
         }
 
         window.addEventListener('beforeprint', beforePrint);
@@ -89,3 +94,4 @@ html
     </script>
 </body>
 </html>
+```
