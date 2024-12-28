@@ -1,111 +1,124 @@
+[00:04, 28/12/2024] Microsoft Copilot: ```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Livre Numérique - Connexion</title>
+    <title>Accueil</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        h1 {
+            background-color: #f3f3f3;
             color: #333;
         }
-        #login {
-            margin-top: 50px;
+        .container {
+            max-width: 600px;
+            margin: auto;
             padding: 20px;
-            background: white;
-            display: inline-block;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        input, button {
+        .header {
+            text-align: center;
+            color: #d4af37; /* Golden color */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
             display: block;
-            margin: 10px auto;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
             padding: 10px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #d4af37; /* Golden color */
+            border: none;
+            color: #fff;
             font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #b89131; /* Darker golden color */
         }
     </style>
 </head>
 <body>
-    <h1>Bienvenue sur Mon Livre Numérique</h1>
-    <div id="login">
-        <h2>Connexion</h2>
-        <form id="login-form">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Mot de passe" required>
-            <button type="submit">Se connecter</button>
-        </form>
-        <p>Pas encore de compte ? <a href="signup.html">Créer un compte</a></p>
+    <div class="container">
+        <h1 class="header">Bienvenue</h1>
+        <div class="form-group">
+            <h2>Connexion</h2>
+            <form id="login-form">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+        <div class="form-group">
+            <h2>Inscription</h2>
+            <form id="signup-form">
+                <label for="new-email">Email :</label>
+                <input type="email" id="new-email" name="email" required>
+                <label for="new-password">Mot de passe :</label>
+                <input type="password" id="new-password" name="password" required>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
     </div>
-
-    <script src="https://apis.google.com/js/api.js"></script>
     <script>
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+        const signupForm = document.getElementById('signup-form');
+        const loginForm = document.getElementById('login-form');
 
-            // Simuler une vérification des identifiants
-            if (email === "test@test.com" && password === "1234") {
-                alert("Connexion réussie !");
-                // Redirigez l'utilisateur vers une page protégée
-                window.location.href = "book.html";
-                
-                // Ajouter l'utilisateur à Google Sheets
-                addUserToSheet(email);
-            } else {
-                alert("Email ou mot de passe incorrect.");
-            }
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('new-email').value;
+            const password = document.getElementById('new-password').value;
+
+            // Envoyer les données d'inscription à Google Sheets
+            fetch('https://script.google.com/macros/s/AKfycbzvVItarXEpI8LIPTzOu09TH19G2YrUoYzZJMBJxT0bJ3kQ0vtJIrLEfEJgmY9TtsCx6Q/exec', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'signup', email: email, password: password })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.status === 'success') {
+                      // Redirection vers la page de paiement après inscription
+                      window.location.href = 'payment.html';
+                  } else {
+                      alert('Échec de l\'inscription. Veuillez réessayer.');
+                  }
+              });
         });
 
-        // Initialiser l'API Google et l'authentification OAuth 2.0
-        function start() {
-            gapi.client.init({
-                'apiKey': 'AIzaSyAfOZBS8Aj5zuP7c7H0p53gVgPP3eVL-ew', // Remplacez par votre clé API
-                'clientId': '514423007006-fcgb4f8c1mst6dac9d11hobrm6d41l1e.apps.googleusercontent.com', // Remplacez par votre ID client
-                'scope': 'https://www.googleapis.com/auth/spreadsheets',
-                'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-            }).then(function () {
-                return gapi.auth2.getAuthInstance().signIn();
-            }).then(function () {
-                console.log("Utilisateur connecté !");
-            }).catch(function (error) {
-                console.error("Erreur d'authentification :", error);
-            });
-        }
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+[00:04, 28/12/2024] Microsoft Copilot: const password = document.getElementById('password').value;
 
-        // Charger la bibliothèque et démarrer l'authentification
-        gapi.load('client:auth2', start);
-
-        // Ajouter un utilisateur dans Google Sheets
-        function addUserToSheet(email) {
-            const spreadsheetId = '1BVHAtWGir5Ple0_nL-J1s4qXH_Et6N1ttfkKQmyjKcc'; // Remplacez par l'ID de votre feuille
-            const range = 'Sheet1!A1'; // Plage pour l'ajout des données (par exemple, dans la colonne A)
-            
-            const values = [
-                [email, new Date().toLocaleString()]  // Ajout de l'email et de la date de connexion
-            ];
-
-            const body = {
-                values: values
-            };
-
-            gapi.client.sheets.spreadsheets.values.append({
-                spreadsheetId: spreadsheetId,
-                range: range,
-                valueInputOption: 'RAW',
-                resource: body
-            }).then(response => {
-                console.log("Utilisateur ajouté à Google Sheets : ", response);
-            }).catch(error => {
-                console.error("Erreur lors de l'ajout de l'utilisateur :", error);
-            });
-        }
+            // Valider les informations de connexion avec Google Sheets
+            fetch('https://script.google.com/macros/s/AKfycbzvVItarXEpI8LIPTzOu09TH19G2YrUoYzZJMBJxT0bJ3kQ0vtJIrLEfEJgmY9TtsCx6Q/exec', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'login', email: email, password: password })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.status === 'success') {
+                      // Redirection vers la page du livre après connexion
+                      window.location.href = 'livre.html';
+                  } else {
+                      alert('Échec de la connexion. Veuillez vérifier vos informations.');
+                  }
+              });
+        });
     </script>
 </body>
 </html>
+```
